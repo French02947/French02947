@@ -1,0 +1,58 @@
+import re
+
+# Given sample, input as a list here:
+part_numbers = ['8VNY-123-4XY', '2A-8A2H6-CHT', '404-001', '1AD78-58P', 'H34O73-205.V01', 'PS143567-0XD']
+
+# Define REGEX pattern
+reg_pattern = r'[0-9,X]*-[0-9,X]*'
+
+regex = re.compile(reg_pattern)
+
+def find_last_three_after_dash(part_numbers):
+    #Find position of last dash
+    last_dash_index = part_number.rfind('-')
+    if last_dash_index == -1:
+        return None
+
+        # Find last 3 characters not including dashes
+    substring_after_dash = part_number[last_dash_index + 1 :]
+    return substring_after_dash[-3:]
+
+for part_number in part_numbers:
+    last_three_after_dash = find_last_three_after_dash(part_number)
+
+def find_last_2_letters(part_numbers):
+    last_dash_index = part_number.rfind('-')
+    if last_dash_index == -1:
+        return None
+
+        # Find last 2 characters not including dashes
+    substring_after_dash = part_number[last_dash_index + 1 :]
+    return substring_after_dash[-2:]
+
+for part_number in part_numbers:
+    last_2_letters = find_last_2_letters(part_number)
+
+def find_last_letter(part_numbers):
+    last_dash_index = part_number.rfind('-')
+    if last_dash_index == -1:
+        return None
+
+        # Find last character not including dashes
+    substring_after_dash = part_number[last_dash_index + 1 :]
+    return substring_after_dash[-1:]
+
+for part_number in part_numbers:
+    last_letter = find_last_letter(part_number)
+
+# Test the function
+for part_number in part_numbers:
+    last_3_letters = find_last_three_after_dash(part_number)
+    last_2_letters = find_last_2_letters(part_number)
+    last_letter = find_last_letter(part_number)
+    if last_3_letters and last_3_letters.isalpha():
+        print(part_number)
+    elif last_2_letters and last_2_letters.isalpha():
+        print(part_number)
+    elif last_letter and last_letter.isalpha():
+        print(part_number)
