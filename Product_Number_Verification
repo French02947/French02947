@@ -4,7 +4,7 @@ import re
 part_numbers = ['8VNY-123-4XY', '2A-8A2H6-CHT', '404-001', '1AD78-58P', 'H34O73-205.V01', 'PS143567-0XD']
 
 # Define REGEX pattern
-reg_pattern = r'[0-9,X]*-[0-9,X]*'
+reg_pattern = r'[0-9,X]*-[0-9,X]*' # Edit: REGEX will be used later
 
 regex = re.compile(reg_pattern)
 
