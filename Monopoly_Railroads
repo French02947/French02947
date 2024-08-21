@@ -1,0 +1,28 @@
+# Author:       Rory French
+# Course:       ANLY615
+# Program:      PY HW2, Problem 2
+# Purpose:      Test an end user to identify which railroad is not a part of the Monopoly Frlanchise.
+# Input:        The data needed for the program to run is the list of Monopoly Railroads, to include 1 false Monopoly Railroad.
+# Process:      Deliver a loop for the system to run given on specific answers to determine if the input given is correct or not. The loop will allow users more chances to guess correctly.
+# Output:       Display a list of Monopoly Railroads to choose from at the beginning. After each guess, display whether the answer was correct or not.
+# Honor Code:   On my honor, as an Aggie, I have neither given nor received unauthorized aid on this academic work.
+
+#Define a list of all railroads in Monopoly to include one that is not correct:
+monopoly_railroads = ["Reading Railroad", "Pennsylvannia Railroad", "B&E Railroad", "Short Line Railroad"]
+    
+#Print the Railroads list
+print("In Monopoly, the following proporties are railroads:", monopoly_railroads)
+
+#IF/Else for possible answers with the given solution printed
+while True:
+    try:
+        answer = input("Which property is not the correct Monopoly Railroad?")
+        
+        if answer.lower() != "b&e railroad":
+            print("I'm sorry. That is not correct. Try again")
+            continue
+        else:
+            print("Correct! It is actually B&O Railroad!")
+            break
+    except ValueError:
+            print("Invalid input. Try Again")
