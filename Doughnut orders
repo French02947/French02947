@@ -1,0 +1,30 @@
+# Author:       Rory French
+# Course:       ANLY615
+# Program:      PY HW2, Problem 1
+# Purpose:      Identify the cost of purchasing doughnuts by the amount ordered.
+# Input:        The data needed is the price for less than a half dozen and a half dozen purchased or more.
+# Process:      Calculate the amount per doughnut based on an input from the user than determines the actual cost per doughnut.
+# Output:       Display the cost per doughnut and the total amount of the purchase based on user input.
+# Honor Code:   On my honor, as an Aggie, I have neither given nor received unauthorized aid on this academic work.
+
+
+# Print input asking how many doughnuts are to be purchased.
+num_doughnuts = int(input("How many doughnuts are you ordering?"))
+
+# Define the price of doughnuts based on how many are ordered:
+def cost_per_doughnut(num_doughnuts):
+    if num_doughnuts < 6:
+        cost_per_doughnut = 1.00
+    else:
+        cost_per_doughnut = 0.75
+
+    total_cost = cost_per_doughnut * num_doughnuts
+    return total_cost
+
+# Print output statement for cost of based on doughnuts ordered and cost per doughnut.
+total_cost = cost_per_doughnut(num_doughnuts)
+print(f"The total cost for {num_doughnuts} doughnut(s) is: ${total_cost}.")
+
+
+
+# Loopback to be created later as well as registering negative numbers as invalid inputs.
