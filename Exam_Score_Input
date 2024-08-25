@@ -1,0 +1,48 @@
+# Author:       Rory French
+# Course:       ANLY615
+# Program:      PY HW2, Problem 5
+# Purpose:      Identify an average of 10 exam scores, the average of the two highest scores, and two losest  scores from input scores by the user.
+# Input:        User input of 10 exam scores that are delivered into an empty list called "exam_scores".
+# Process:      After the user delivers the 10 scores, sort the values from lowest to highest. Sum all of the scores and divide by the total inputs, then take the 
+                lowest and highest two scores and divide by two to determine all averages.
+# Output:       Display the averages of all the given solutions in a print function, clearly identifying the results of each answer.
+# Honor Code:   On my honor, as an Aggie, I have neither given nor received unauthorized aid on this academic work.
+
+exam_scores = []
+
+def main():
+    # Ask the user for 10 exam scores input
+    print("Please enter 10 exam score percentages.")
+
+for value in range(10):
+    while True:
+        try:
+            score = float(input(f"Exam score {value + 1}: "))
+            if score < 0:
+                raise ValueError("Score cannot be a negative number")
+            elif score > 100:
+                raise ValueError("Score cannot exceed a value greater than 100")
+            exam_scores.append(score)
+            break
+        except ValueError as ve:
+            print(f"Invalid Input: {ve}. Enter a valid score.")
+
+
+# Calulate the overall average of the scores given
+overall_score = sum(exam_scores) / len(exam_scores)
+
+#Sore the scores from lowest to highest scores
+sorted_scores = sorted(exam_scores)
+
+# Calculate the average of the two highest scores
+two_highest = sorted_scores[-2:]
+average_two_highest = sum(two_highest) / 2
+
+# Calculate the average of the two lowest scores
+two_lowest = sorted_scores[:2]
+average_two_lowest = sum(two_lowest) / 2
+
+# Display the results
+print(f"\nOverall average of all scores: {overall_score}")
+print(f"Average of the two highest scores: {average_two_highest}")
+print(f"Average of the two lowest scores: {average_two_lowest}")
