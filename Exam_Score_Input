@@ -28,7 +28,7 @@ for value in range(10):
             print(f"Invalid Input: {ve}. Enter a valid score.")
 
 
-# Calulate the overall average of the scores given
+# Calculate the overall average of the scores given
 overall_score = sum(exam_scores) / len(exam_scores)
 
 #Sore the scores from lowest to highest scores
