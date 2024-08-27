@@ -1,0 +1,8 @@
+def add_binary(a,b):
+    #your code here
+    sum = a + b
+    
+    # Convert to Binary
+    binary_sum = bin(sum)[2:] # Removes the 0b in the first two spaces of the answer
+    
+    return binary_sum
