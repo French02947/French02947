@@ -1,0 +1,18 @@
+import re
+
+def is_a_valid_message(message):
+    # your code
+    # REGEX pattern to identify number-substring pairs
+    matches = re.findall(r'(\d+)([a-zA-Z]+)', message)
+    
+    for num_string, substring in matches:
+        num = int(num_string)
+        if len(substring) != num:
+            return False
+    
+    # Ensure entire length of input string has been consumed
+    total_length = sum(len(num_string) + len(substring) for substring, num_string in matches)
+    if total_length != len(message):
+        return False
+    
+    return True
