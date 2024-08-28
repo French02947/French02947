@@ -1,0 +1,38 @@
+# Author:       Rory French
+# Course:       ANLY615
+# Program:      PY HW3, Problem 4
+# Purpose:      Properly calculate the factorial of a given integer input.
+# Input:        User Input of a given positive number.
+# Process:      Identify a pattern to calculate the factorial of the input. Recover the integer first, then run factorial calculation.
+# Output:       Print the result of the positive number followed by the answer to its factorial.
+# Honor Code:   On my honor, as an Aggie, I have neither given nor received unauthorized aid on this academic work.
+
+
+def get_positive_integer():
+    # Prompt user to input a positive number!
+    while True:
+        try:
+            num_input = int(input("Please enter a positive number: "))
+            if num_input > 0:
+                return num_input
+            else:
+                print("Please enter a positive integer.")
+        except ValueError:
+            print("Invalid Input")
+
+def calculate_factorial(num):
+    # Calculate the factorial for a positive integer (num).
+    factorial = 1
+    for i in range(1, num + 1):
+        factorial *= i
+    return factorial
+
+def main():
+    # Control the program flow from the Main function.
+    print("Factorial Calculator")
+    positive_number = get_positive_integer()
+    factorial_result = calculate_factorial(positive_number)
+    print(f"The factorial of {positive_number} is: {factorial_result}")
+
+if __name__ == "__main__":
+    main()
