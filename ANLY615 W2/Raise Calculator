@@ -1,0 +1,55 @@
+# Author:       Rory French
+# Course:       ANLY615
+# Program:      PY HW3, Problem 6
+# Purpose:      Calculate Raise amounts for current employees based on current Salary amount.
+# Input:        User Input of Salary, First Name, and Last Name.
+# Process:      After all inputs are correctly registered, Salary will be used to calculate the new raise amount then added to a new total salary amount.
+# Output:       Print the results of the Old Salary, Raise amount (not including old salary), Raise rate (in percentage), and the new total salary.
+# Honor Code:   On my honor, as an Aggie, I have neither given nor received unauthorized aid on this academic work.
+
+# Print Program name
+def display_greeting():
+    print("Salary Adjustment Program")
+
+def inputs():
+    try:
+        #Ask user for inputs of Salary, First name, and Last name
+        salary = float(input("Enter your current salary: $"))
+        first_name = input("Enter your first name:")
+        last_name = input ("Enter your last name:")
+    except ValueError:
+        print("Invalid input.")
+        return None, None, None # One error drops all inputs.
+    return salary, first_name, last_name
+
+#Calculate the raise amounts for over/under 50,000 salary input
+def calculate_raise(salary):
+    if salary < 50000:
+        raise_total = salary * 0.05
+    else:
+        raise_total = 2500 + (0.02 * (salary - 50000))
+
+    new_salary = salary + raise_total
+    return raise_total, new_salary
+
+def display_results(salary, raise_total, new_salary):
+    #Display the Results
+    raise_rate = (raise_total / salary) * 100
+    print("\nSalary Adjustment Summary:\n")
+    print(f"Old Salary:\t${salary}")
+    print(f"Raise Amount:\t${raise_total}")
+    print(f"Raise rate:\t{raise_rate}%")
+    print(f"New Salary:\t${new_salary}")
+
+def main():
+    # Main function to control program flow.
+    display_greeting()
+
+    salary, first_name, last_name = inputs()
+
+    if salary is not None:
+        raise_total, new_salary = calculate_raise(salary)
+        display_results(salary, raise_total, new_salary)
+
+if __name__ == "__main__":
+    main()
