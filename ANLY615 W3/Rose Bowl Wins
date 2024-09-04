@@ -1,0 +1,57 @@
+# Author:       Rory French
+# Course:       ANLY615
+# Program:      PY HW 4, Problem 5
+# Purpose:      Determine the teams from the given txt file that have more than 4 Rose Bowl wins.
+# Input:        Import and read the original .txt file.
+# Process:      Count the number of wins for each team and put them into a new dictionary. Write the results to a new CSV file, then limit results to teams with more than 4 Rose Bowl wins.
+# Output:       Print the results to display which team names have more than 4 Rose Bowl wins and show the total number of wins by these teams.
+# Honor Code:   On my honor, as an Aggie, I have neither given nor received unauthorized aid on this academic work.
+
+# Import necessary functions needed.
+import csv
+from collections import defaultdict
+
+def count_wins(input_file):
+    # Dictionary to hold team wins
+    wins_by_team = defaultdict(int)
+
+    # Read the file and count
+    with open(input_file, 'r') as file:
+        for line in file:
+            team_name = line.strip()
+            wins_by_team[team_name] += 1
+
+    return wins_by_team
+
+def write_wins_to_csv(wins_by_team, output_file):
+    # Write result to a new CSV file
+    with open(output_file, "w", newline= "") as csvfile:
+        field_names = ["Team", "Wins"]
+        writer = csv.DictWriter(csvfile, fieldnames=field_names)
+
+        writer.writeheader()
+        for team, wins in wins_by_team.items():
+            writer.writerow({"Team": team, "Wins": wins})
+
+def display_more_than_four_wins(wins_by_team):
+    # Display teams with more than 4 wins
+    print("Teams with more than four Rose Bowl wins:\n")
+    for team, wins in wins_by_team.items():
+        if wins > 4:
+            print(f"{team}:\n{wins}")
+
+def main():
+    input_file = "Rosebowl.txt"
+    output_file = "Rosebowl.csv"
+
+    # Count the number of wins for each team
+    wins_by_team = count_wins(input_file)
+
+    # Write the results to a new CSV file
+    write_wins_to_csv(wins_by_team, output_file)
+
+    # Display teams with more than 4 Rose Bowl wins
+    display_more_than_four_wins(wins_by_team)
+
+if __name__ == "__main__":
+    main()
