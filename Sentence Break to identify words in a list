@@ -1,0 +1,21 @@
+# Operate main function for program.
+def main():
+    # Offer an input for a user input sentence
+    sentence = input("Please enter a sentence!\n")
+    words = sentence.split()
+
+    # Identify the first and last word in the sentence and length of the sentence.
+    if words:
+        first_word = words[0]
+        last_word = words[-1]
+        word_count = len(words)
+
+        # Print results
+        print("First Word of the sentence: ", first_word)
+        print("Last word of the sentence: ", last_word)
+        print(f"Your sentence has {word_count} words.")
+    else:
+        print("Please enter a proper full sentence")
+
+if __name__ == "__main__":
+    main()
