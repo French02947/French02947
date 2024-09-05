@@ -1,0 +1,28 @@
+# Author:       Rory French
+# Course:       ANLY615
+# Program:      PY HW 4, Problem 2
+# Purpose:      Find a word based on user input if the word has all letters in alphabetical order.
+# Input:        user input of a word.
+# Process:      Convert the word to lowercase then check to make sure each letter falls below or equal to the previous letter.
+# Output:       Print functions will tell the user if their word is or is not in alphabetical order.
+# Honor Code:   On my honor, as an Aggie, I have neither given nor received unauthorized aid on this academic work.
+
+def is_alphabetical(word):
+    # Convert word to lowercase
+    word = word.lower()
+
+    # Check if each letter is less than or equal to the letter observed
+    return all(word[i] <= word[i + 1] for i in range(len(word) - 1))
+
+def main():
+    # Ask a user input for a word
+    user_word = input("Enter a word:\n")
+
+    # Check if user input of word is in alphabetical using def statement
+    if is_alphabetical(user_word):
+        print(f"The letters in {user_word} are in alphabetical order.")
+    else:
+        print(f"The letters in {user_word} are not in alphabetical order.")
+
+if __name__ == "__main__":
+    main()
