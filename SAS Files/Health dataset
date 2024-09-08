@@ -1,0 +1,73 @@
+/*Create a library and name it as "health." Import the dataset and store it in heath library as health1. Create a temporary dataset named "t_health1."*/
+libname health "C:\Users\rory_\OneDrive\Documents\ANLY608 SAS\MSA608_2024\Week 3\Assignment exercise"; run; quit;
+
+PROC IMPORT DATAFILE= "C:\Users\rory_\OneDrive\Documents\ANLY608 SAS\MSA608_2024\Week 3\Assignment exercise\Heath Data.csv"
+OUT=Health1
+DBMS=csv
+REPLACE;
+GETNAMES=YES;
+RUN;
+
+data t_health1; set health1; run;
+
+PROC MEANS DATA=t_health1;
+	VAR _ALL_;
+run;
+
+DATA t_health2; set t_health1; if subj= "110055";run;
+data t_health3 (keep=subj rbc);set t_health2;run;
+
+/*Find the summary statistics (i.e., number of observations, mean, std. dev, minimum and maximum) of rbc, hcrit, wbc, and mchc for each hospital (hosp).*/
+PROC MEANS DATA=health1;
+	var rbc hcrit wbc mchc;
+	by hosp;
+run;
+
+
+
+/*Create an output dataset that contains mean and median of RBC, WBC, and HCRIT for each hospital. Title the output dataset as "Hospitals' Mean and Median of RBC, WBC, HCRIT.*/
+PROC MEANS DATA=health1 NOPRINT;
+		var rbc wbc hcrit;
+	class hosp;
+	output out = hospsum
+			mean = MeanRBC MeanWBC MeanHCRIT
+			median = MedianRBC MedianWBC MedianHCRIT;
+run;
+
+Proc PRINT;
+TITLE "Hospitals' Mean and Median of RBC, WBC, HCRIT";run;
+
+/*Create a histogram and a boxplot for WBC. Also create a scatterplot where y axis=wbc and x-axis=rbc.*/
+/*Histogram*/
+proc univariate data = health1 plots;
+var wbc; 
+run;
+
+
+TITLE 'Summary of Hospital WBC';
+PROC UNIVARIATE DATA = health1 NOPRINT;
+HISTOGRAM wbc/NORMAL;
+RUN;
+
+/*Boxplot*/
+PROC SGPLOT  DATA = health1;
+   VBOX wbc;
+
+   title 'Summary of Hospital WBC';
+RUN;
+
+/*scatterplot*/
+proc sgplot data=health1;
+    scatter x = rbc  y = wbc;
+run;
+
+/*Create three datasets-s1, s2, s3 for subj=210006, 3100032,410010 (name them as The s210006 data set, The s310032 data set, and The s410010 data set, respectively.*/
+data S1;set health1;run;
+data S2;set health1;run;
+data S3;set health1;run;
+
+/*Narrow down all 3 datasets to each perspective subject*/
+DATA S210006; set S2; if subj= "210006";run;
+DATA S310032; set S2; if subj= "310032";run;
+DATA S410010; set S2; if subj= "410010";run;
+
