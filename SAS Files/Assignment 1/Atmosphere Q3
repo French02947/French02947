@@ -1,0 +1,52 @@
+libname m6082024 "C:\Users\rory_\OneDrive\Documents\ANLY608 SAS\MSA608_2024";run;quit;
+
+PROC IMPORT DATAFILE= "C:\Users\rory_\OneDrive\Documents\ANLY608 SAS\MSA608_2024\Week 3\Assignment exercise\Atmosphere.csv"
+OUT=Atmosphere
+DBMS=csv
+REPLACE;
+GETNAMES=YES;
+RUN;
+
+/*Convert the temperature from Celsius to Fahrenheit by using the formula Fahrenheit = 1.8*Celsius + 32.*/
+data Fahrenheit1;set Atmosphere; 
+jan_F=1.8*jan + 32;
+feb_F=1.8*feb + 32;
+mar_F=1.8*mar + 32;
+apr_F=1.8*apr + 32;
+may_F=1.8*may + 32;
+jun_F=1.8*jun + 32;
+jul_F=1.8*jul + 32;
+aug_F=1.8*aug + 32;
+sep_F=1.8*sep + 32;
+oct_F=1.8*oct + 32;
+nov_F=1.8*nov + 32;
+dec_F=1.8*dec + 32;
+drop jan--dec;run;
+/*End Part 1*/
+
+
+/*2. Create a do loop to covert the Celsius to Fahrenheit using the formula Fahrenheit. Name the output dataset as fahrenheit2.*/
+data fahrenheit2;
+	retain City jan F_jan feb F_feb mar F_mar apr F_apr may F_may jun F_jun jul F_jul aug F_aug sep F_sep oct F_oct nov F_nov dec F_dec;
+	set Atmosphere;
+
+	/*Initialize array to store celsius values*/
+	array months[12] jan feb mar apr may jun jul aug sep oct nov dec;
+	/*Initialize array to store Fahrenheit values*/
+	array f_months[12] F_jan F_feb F_mar F_apr F_may F_jun F_jul F_aug F_sep F_oct F_nov F_dec;
+
+	/*Do loop to convert Temperature from Celsius to Fahrenheit*/
+	do i = 1 to 12;
+		f_months[i] = (1.8*months[i]) +32;
+	end;
+
+	/*Drop variable 'i' and reorder*/
+	drop i;
+run;
+
+/*Print output of the new converted dataset*/
+proc print data=fahrenheit2;
+run;
+
+/*End part 2*/
+/*End Question 3*/
