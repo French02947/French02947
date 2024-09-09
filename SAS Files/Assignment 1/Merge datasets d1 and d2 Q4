@@ -1,0 +1,66 @@
+libname m6082024 "C:\Users\rory_\OneDrive\Documents\ANLY608 SAS\MSA608_2024";run;quit;
+
+PROC IMPORT DATAFILE= "C:\Users\rory_\OneDrive\Documents\ANLY608 SAS\MSA608_2024\Week 3\Assignment exercise\d1.csv"
+OUT=d1
+DBMS=csv
+REPLACE;
+GETNAMES=YES;
+RUN;
+
+PROC IMPORT DATAFILE= "C:\Users\rory_\OneDrive\Documents\ANLY608 SAS\MSA608_2024\Week 3\Assignment exercise\d2.csv"
+OUT=d2
+DBMS=csv
+REPLACE;
+GETNAMES=YES;
+RUN;
+
+/*ANLY608 Assignment 1 Q4*/
+/*1. Merge the two datasets.*/
+/*Sort each dataset by id*/
+proc sort data=d1; by id; run;
+proc sort data=d1; by id; run;
+
+/*Merge the two datasets*/
+data merged; merge d1 d2;by id; run;
+/*End Step 1 of Question 4*/
+
+
+/*2. Replace the missing observations (if any) by the mean of the variable.*/
+/*Replace Age values with Mean of Age*/
+proc means data=merged noprint;
+	var age;
+	output out= mean_age mean=mean_age;
+run;
+
+data merged_age_filled;
+	if _N_ = '1' then set mean_age;
+	set merged;
+	if missing(age) then age=mean_age;
+run;
+
+/*Replace Visit values with Mean Visit*/
+proc means data=merged_age_filled noprint;
+	var visit;
+	output out= mean_visit mean=mean_visit;
+run;
+
+data merged_age_visit_filled;
+	if _N_ = '1' then set mean_visit;
+	set merged_age_filled;
+	if missing(visit) then visit=mean_visit;
+run;
+
+/*Replace Outcome values with Outcome Visit*/
+proc means data=merged_age_visit_filled noprint;
+	var outcome;
+	output out= mean_outcome mean=mean_outcome;
+run;
+
+data merged_filled;
+	if _N_ = '1' then set mean_outcome;
+	set merged_age_visit_filled;
+	if missing(outcome) then outcome=mean_outcome;
+	drop _TYPE_ _FREQ_ mean_outcome mean_visit mean_age
+run;
+/*End Step 2*/
+/*End of Q4 for Assingment 1*/
