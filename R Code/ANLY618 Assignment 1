@@ -1,0 +1,135 @@
+install.packages("Hmisc")
+install.packages("pastecs")
+install.packages("psych")
+install.packages("ggplot2")
+library("ggplot2")
+install.packages("tidyverse")
+library("tidyverse")
+install.packages("RColorBrewer")
+library("RColorBrewer")
+install.packages("HistData")
+library("HistData")
+install.packages(c("rgl", "car"))
+library("car")
+library("rgl")
+
+-----------------------------------------------------------------------------------------------------------------
+# Assignment 1 Q5:
+# Part 1:
+b <- seq(7,  40, by = 1.5)
+df1<-data.frame('weight of babies' = b)
+view(df1)
+
+mean_weight<-mean(df1$weight.of.babies)
+sd_weight<-sd(df1$weight.of.babies)
+
+print(paste('Mean: ', mean_weight))
+print(paste('Standard Deviation: ', sd_weight))
+
+# Part 2:
+hist(df1$weight.of.babies,
+main="Weight of Babies",
+xlab="Weight of Babies",
+ylab="Frequency",
+col="blue",)
+
+# End of Question 5
+-----------------------------------------------------------------------------------------------------------------
+Assignment 1 Q6:
+Part 1:
+sales<- c (NA, "TP", 4, 6.7, 'c', NA, 12)
+view(sales)
+
+na_positions <- is.na(sales)
+print(na_positions)
+
+Part 2:
+na_indices <- which(is.na(sales))
+print(na_indices)
+
+Part 3:
+sum_na <- sum(is.na(sales))
+print(sum_na)
+
+#End of Question 6
+---------------------------------------------------------------------------------------------------------------
+Assignment 1 Q7:
+Part 1:
+dataframe <- data.frame( Name = c("Bell", "Dia", "KKN", "Nia"),
+
+   Physics = c(98, 87, 91, 94),
+
+   Chemistry = c(NA, 84, 93, 87),
+
+   Mathematics = c(91, 86, NA, NA) )
+view(dataframe)
+
+col_means <- colMeans(dataframe[,-1], na.rm = TRUE)
+print(col_means)
+
+for (col in names(col_means)){
+	dataframe[is.na(dataframe[[col]]), col] <- col_means[col]}
+print(dataframe)
+
+# End of Question 7
+---------------------------------------------------------------------------------------------------------------
+Assignment 1 Q8:
+Part 1:
+setwd("C:/Users/rory_/OneDrive/Documents/ANLY608 SAS/MSA608_2024/Week 4")
+titanic<-read.csv("titanic.csv")
+view(titanic)
+names(titanic)
+
+sum_survived<-sum(titanic$Survived == 1)
+print(paste("Total Survived: ", sum_survived))
+
+Part 2:
+sum_dead<-sum(titanic$Survived == 0)
+print(paste("Total Dead: ", sum_dead))
+
+Part 3:
+sum_male<-sum(titanic$Sex == "male")
+print(paste("Total Men: ", sum_male))
+
+Part 4:
+sum_female<-sum(titanic$Sex == "female")
+print(paste("Total Women: ", sum_female))
+
+Part 5:
+summary(titanic$Age)
+max_age<-max(titanic$Age, na.rm = TRUE)
+print(paste("The oldest person on the Titanic was: ", max_age))
+
+Part 6:
+median_age<-median(titanic$Age, na.rm = TRUE)
+print(paste("The average age of people on the Titanic was: ", median_age))
+
+# End of Question 8
+----------------------------------------------------------------------------------------------------------------------
+# Assignment 1 Q9:
+Part 1:
+df <- data.frame(player = c('A', 'B', 'C', 'D', 'E', 'F'),
+
+                 position = c('R1', 'R2', 'R3', 'R4', 'R5', NA),
+
+                 points = c(102, 105, 219, 322, 232, NA),
+
+                 assists = c(405, 407, 527, 412, 211, NA))
+view(df)
+
+# create Quality variable
+df$quality <- ifelse(df$points > 215, "Medium",
+			ifelse(df$points > 120, "high", "low"))
+view(df)
+
+# Part 2:
+#Create new variable "Performance"
+df$performance <- ifelse(df$points > 215 & df$assists > 10, "great",
+				ifelse(df$points > 215 & df$assists > 5, "good", "average"))
+view(df)
+
+
+
+
+# End of Question 9
+--------------------------------------------------End of Assignment 1--------------------------------------------------
