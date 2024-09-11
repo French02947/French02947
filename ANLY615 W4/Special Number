@@ -1,0 +1,33 @@
+# Author:       Rory French
+# Course:       ANLY615
+# Program:      PY HW 5, Problem 2
+# Purpose:      Find a random four digit number that, when multiplied by 4, is the reverse of the original number.
+# Input:        Find a random number between the numbers 1000 and 9999 to include these two numbers.
+# Process:      Generate a find number sequence then multiply these numbers by 4. After, check to ensure the number matches the original number in reverse.
+# Output:       Generate results as finding the correct output of the original number and its reverse.
+# Honor Code:   On my honor, as an Aggie, I have neither given nor received unauthorized aid on this academic work.
+
+def is_reverse(num1, num2):
+    #Check if num2 is the reverse of num1
+    return str(num2) == str(num1)[::-1]
+
+def find_num():
+    for num in range(1000, 10000):
+        multiplied = num * 4
+        
+        # Utilize def statement to run that the numbers are reverse when multiplied by 4.
+        if is_reverse(num, multiplied):
+            return num
+    return None
+
+def main():
+    # Main function to FIND and display the number.
+    result = find_num()
+    result_4 = result * 4
+    if result:
+        print(f"The four-digit number is {result}, multiplied by 4 is {result_4}")
+    else:
+        print("No such number found")
+
+if __name__ == "__main__":
+    main()
