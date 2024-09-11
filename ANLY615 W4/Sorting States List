@@ -1,0 +1,29 @@
+# Author:       Rory French
+# Course:       ANLY615
+# Program:      PY HW 5, Problem 5
+# Purpose:      Determine the states in order from least to most consonants in its name.
+# Input:        Identify what the vowels are and read the States.txt file.
+# Process:      Read the .txt file making sure all lines are read separately, count consonants of each state, then sort the states.
+# Output:       In ascending order, show the results of the states with the least consonants to the most.
+# Honor Code:   On my honor, as an Aggie, I have neither given nor received unauthorized aid on this academic work.
+
+def count_consonants(word):
+    # Define vowels
+    vowels = "aeiouAEIOU"
+    # Count consonants by checking that each character is a letter AND not a vowel.
+    return sum(1 for char in word if char.isalpha() and char not in vowels)
+
+def main():
+    # Read the file into a list
+    with open('States.txt', 'r') as file:
+        states = [line.strip() for line in file]
+
+    # Sort the list based on number of consonants
+    states_sorted = sorted(states, key=count_consonants)
+
+    # Print the sorted list
+    for state in states_sorted:
+        print(state)
+
+if __name__ == "__main__":
+    main()
