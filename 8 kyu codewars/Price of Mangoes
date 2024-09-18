@@ -1,0 +1,5 @@
+def mango(quantity, price):
+    paid = quantity - (quantity // 3)
+    
+    total_cost = paid * price
+    return total_cost
